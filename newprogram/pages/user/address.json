@@ -1,0 +1,19 @@
+{
+  "pages": [
+    "pages/user/address",
+    "pages/index/index",
+    "pages/auth/auth",
+    "pages/travel/travel",
+    "pages/activity/activity",
+    "pages/forum/forum",
+    "pages/shop/shop",
+    "pages/shop/detail",
+    "pages/shop/history",
+    "pages/message/message",
+    "pages/settings/settings",
+    "pages/user/user"
+  ],
+  "window": {
+    "navigationBarTitleText": "低碳出行"
+  }
+}

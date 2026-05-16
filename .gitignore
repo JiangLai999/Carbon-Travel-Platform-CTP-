@@ -1,0 +1,27 @@
+# Dependencies
+newprogram/node_modules/
+backend/admin/node_modules/
+
+# Build outputs
+backend/target/
+backend/admin/dist/
+
+# IDE
+.idea/
+*.iml
+
+# Uploads
+backend/uploads/*
+!backend/uploads/.gitkeep
+
+# Logs
+*.log
+app.log
+
+# OS
+.DS_Store
+Thumbs.db
+nul
+
+# Backup
+_backup_before_cleanup/

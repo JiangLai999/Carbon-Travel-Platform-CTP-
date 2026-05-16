@@ -1,0 +1,6 @@
+{
+  "usingComponents": {},
+  "navigationBarTitleText": "我的行程",
+  "enablePullDownRefresh": true,
+  "backgroundColor": "#f5f7fa"
+}

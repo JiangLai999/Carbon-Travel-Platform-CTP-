@@ -1,0 +1,72 @@
+spring:
+  application:
+    name: carbon-platform
+  datasource:
+    url: jdbc:mysql://localhost:3306/carbon_platform?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+  redis:
+    host: localhost
+    port: 6379
+    password:
+    timeout: 10000ms
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+  jackson:
+    default-property-inclusion: non_null
+    serialization:
+      write-dates-as-timestamps: false
+    time-zone: Asia/Shanghai
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 50MB
+
+mybatis-plus:
+  mapper-locations: classpath*:/mapper/**/*.xml
+  type-aliases-package: com.carbon.platform.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+logging:
+  level:
+    root: info
+    com.carbon.platform: debug
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+
+# JWT配置
+jwt:
+  secret: carbon-platform-secret-key-2024-low-carbon-travel-incentive-platform
+  expiration: 86400000
+
+# 微信配置
+wechat:
+  appid: your_wechat_appid
+  secret: your_wechat_secret
+  mch-id: your_mch_id
+  api-key: your_api_key
+
+# 文件上传配置
+upload:
+  path: uploads
+  max-size: 5242880

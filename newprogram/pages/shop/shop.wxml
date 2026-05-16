@@ -1,0 +1,78 @@
+<view class="page">
+  <!-- 头部 -->
+  <view class="header">
+    <view class="header-bg"></view>
+    <view class="header-content">
+      <view class="header-top">
+        <text class="header-title">积分商城</text>
+        <view class="header-actions">
+          <view class="action-btn" bindtap="goExchangeHistory">
+            <text class="action-icon">📋</text>
+            <text class="action-text">兑换记录</text>
+          </view>
+        </view>
+      </view>
+      <view class="points-card">
+        <view class="points-left">
+          <view class="points-icon-wrap">
+            <text class="points-icon">🪙</text>
+          </view>
+          <view class="points-info">
+            <text class="points-label">可用积分</text>
+            <text class="points-value">{{totalPoints}}</text>
+          </view>
+        </view>
+        <view class="points-right">
+          <text class="points-hint">做任务赚更多</text>
+          <text class="points-arrow">›</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 分类筛选 -->
+  <view class="categories">
+    <scroll-view scroll-x class="category-scroll" enhanced show-scrollbar="{{false}}">
+      <view class="category-item {{selectedCategory === item.code ? 'active' : ''}}" wx:for="{{categories}}" wx:key="code" bindtap="selectCategory" data-category="{{item.code}}">
+        <text>{{item.name}}</text>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 商品列表 -->
+  <scroll-view scroll-y class="scroll-content" enhanced show-scrollbar="{{false}}">
+    <view class="products-grid">
+      <view class="product-card" wx:for="{{filteredProducts}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+        <view class="product-image">
+          <image src="{{item.imageUrl}}" mode="aspectFill" class="product-img" />
+          <view class="product-badge" wx:if="{{item.carbonLabel}}">
+            <text>{{item.carbonLabel}}</text>
+          </view>
+          <view class="stock-badge" wx:if="{{item.stock <= 10 && item.stock > 0}}">
+            <text>仅剩{{item.stock}}件</text>
+          </view>
+        </view>
+        <view class="product-info">
+          <text class="product-name">{{item.name}}</text>
+          <text class="product-desc">{{item.description}}</text>
+          <view class="product-footer">
+            <view class="points-tag">
+              <text class="points-num">{{item.pointsRequired}}</text>
+              <text class="points-unit">积分</text>
+            </view>
+            <view class="exchange-btn">兑换</view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 空状态 -->
+    <view class="empty-card" wx:if="{{filteredProducts.length === 0}}">
+      <text class="empty-icon">🎁</text>
+      <text class="empty-title">暂无商品</text>
+      <text class="empty-desc">该分类下暂无商品，看看其他分类吧</text>
+    </view>
+
+    <view class="bottom-safe"></view>
+  </scroll-view>
+</view>

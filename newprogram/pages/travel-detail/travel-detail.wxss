@@ -1,0 +1,360 @@
+page {
+  background: var(--bg-page);
+}
+
+.page {
+  min-height: 100vh;
+  padding: var(--spacing-lg);
+  box-sizing: border-box;
+}
+
+/* ========== 加载状态 ========== */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 60rpx;
+}
+
+.loading-spinner {
+  width: 48rpx;
+  height: 48rpx;
+  border: 4rpx solid var(--border-color);
+  border-top-color: var(--primary-color);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin-bottom: var(--spacing-md);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: var(--font-md);
+  color: var(--text-placeholder);
+}
+
+/* ========== 状态卡片 ========== */
+.status-card {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+.status-icon {
+  width: 80rpx;
+  height: 80rpx;
+  background: var(--primary-bg);
+  border-radius: var(--radius-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40rpx;
+  flex-shrink: 0;
+}
+
+.status-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.status-name {
+  font-size: var(--font-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.status-badge {
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 4rpx 16rpx;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-xs);
+  font-weight: 600;
+}
+
+.status-badge.pending {
+  background: var(--warning-bg);
+  color: var(--warning-text);
+}
+
+.status-badge.approved {
+  background: var(--success-bg);
+  color: var(--success-text);
+}
+
+.status-badge.rejected {
+  background: var(--error-bg);
+  color: var(--error-text);
+}
+
+.status-date {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4rpx;
+  flex-shrink: 0;
+}
+
+.date-text {
+  font-size: var(--font-sm);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.time-text {
+  font-size: var(--font-xs);
+  color: var(--text-placeholder);
+}
+
+/* ========== 区块 ========== */
+.section {
+  margin-bottom: var(--spacing-lg);
+}
+
+.section-title {
+  font-size: var(--font-lg);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-md);
+  padding-left: 8rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.track-badge {
+  font-size: var(--font-xs);
+  color: var(--primary-color);
+  background: var(--primary-bg);
+  padding: 4rpx 12rpx;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+}
+
+/* ========== 轨迹地图 ========== */
+.map-container {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.track-map {
+  width: 100%;
+  height: 400rpx;
+  border-radius: var(--radius-lg);
+}
+
+.track-stats {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.track-stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rpx;
+  background: var(--bg-page);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+}
+
+.track-stat-num {
+  font-size: var(--font-lg);
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+.track-stat-label {
+  font-size: var(--font-xs);
+  color: var(--text-placeholder);
+}
+
+/* ========== 路线卡片 ========== */
+.route-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl);
+  box-shadow: var(--shadow-sm);
+}
+
+.route-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+}
+
+.route-dot {
+  width: 16rpx;
+  height: 16rpx;
+  border-radius: 50%;
+  margin-top: 8rpx;
+  flex-shrink: 0;
+}
+
+.route-dot.start {
+  background: var(--primary-color);
+}
+
+.route-dot.end {
+  background: var(--error-color);
+}
+
+.route-line {
+  width: 2rpx;
+  height: 48rpx;
+  background: linear-gradient(180deg, var(--primary-color) 0%, var(--error-color) 100%);
+  margin-left: 7rpx;
+}
+
+.route-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.route-label {
+  font-size: var(--font-xs);
+  color: var(--text-placeholder);
+}
+
+.route-value {
+  font-size: var(--font-md);
+  color: var(--text-primary);
+  font-weight: 500;
+  word-break: break-all;
+}
+
+/* ========== 数据统计网格 ========== */
+.stats-grid {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.stat-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4rpx;
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-xl) var(--spacing-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.stat-num {
+  font-size: 40rpx;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.stat-num.carbon {
+  color: var(--primary-color);
+}
+
+.stat-num.points {
+  color: var(--accent-color);
+}
+
+.stat-unit {
+  font-size: var(--font-xs);
+  color: var(--text-placeholder);
+  font-weight: 500;
+}
+
+.stat-label {
+  font-size: var(--font-xs);
+  color: var(--text-tertiary);
+  margin-top: 4rpx;
+}
+
+/* ========== 信息卡片 ========== */
+.info-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-xl);
+  padding: 0 var(--spacing-lg);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.info-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-lg) 0;
+  border-bottom: 1rpx solid var(--border-lighter);
+}
+
+.info-row:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-size: var(--font-md);
+  color: var(--text-secondary);
+}
+
+.info-value {
+  font-size: var(--font-md);
+  color: var(--text-primary);
+  font-weight: 500;
+  max-width: 60%;
+  text-align: right;
+  word-break: break-all;
+}
+
+/* ========== 空状态 ========== */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120rpx 60rpx;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  margin-bottom: var(--spacing-md);
+}
+
+.empty-text {
+  font-size: var(--font-lg);
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin-bottom: var(--spacing-xl);
+}
+
+.btn-back {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  color: #fff;
+  font-size: var(--font-lg);
+  font-weight: 600;
+  padding: 20rpx 56rpx;
+  border-radius: 48rpx;
+  border: none;
+  box-shadow: var(--shadow-primary);
+}
+
+.btn-back:active {
+  opacity: 0.9;
+}
+
+/* ========== 底部安全区 ========== */
+.bottom-safe {
+  height: calc(env(safe-area-inset-bottom) + 40rpx);
+}

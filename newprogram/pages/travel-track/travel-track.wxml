@@ -1,0 +1,151 @@
+<view class="page">
+  <view class="header">
+    <text class="header-title">出行记录</text>
+  </view>
+
+  <!-- 记录模式选择 -->
+  <view class="section">
+    <text class="section-label">记录方式</text>
+    <view class="record-mode-grid">
+      <view class="record-mode-item {{recordMode === 'gps' ? 'active' : ''}}" bindtap="switchRecordMode" data-mode="gps">
+        <text class="mode-icon">📍</text>
+        <text class="mode-text">GPS轨迹</text>
+        <text class="mode-desc">实时追踪轨迹</text>
+      </view>
+      <view class="record-mode-item {{recordMode === 'select' ? 'active' : ''}}" bindtap="switchRecordMode" data-mode="select">
+        <text class="mode-icon">🗺️</text>
+        <text class="mode-text">起终点选择</text>
+        <text class="mode-desc">地图选点测距</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 出行方式选择 -->
+  <view class="section">
+    <text class="section-label">出行方式</text>
+    <view class="mode-grid">
+      <view class="mode-item {{selectedMode === item.id ? 'active' : ''}}" wx:for="{{travelModes}}" wx:key="id" bindtap="selectMode" data-mode="{{item.id}}">
+        <text class="mode-emoji">{{item.icon}}</text>
+        <text class="mode-name">{{item.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 地图区域 -->
+  <view class="map-section">
+    <map 
+      id="map" 
+      class="map" 
+      latitude="{{latitude}}" 
+      longitude="{{longitude}}" 
+      scale="{{recordMode === 'select' ? 14 : 16}}" 
+      markers="{{markers}}" 
+      polyline="{{polyline}}" 
+      show-location
+      bindtap="onMapTap"
+      bindmarkertap="onMarkerTap"
+    ></map>
+    
+    <!-- 地图提示 -->
+    <view class="map-tip" wx:if="{{recordMode === 'select'}}">
+      <text wx:if="{{!startPoint.latitude}}">👆 点击地图添加起点 | 点击标记删除</text>
+      <text wx:elif="{{!endPoint.latitude}}">👆 点击地图添加终点 | 点击标记删除</text>
+      <text wx:else>✅ 起终点已选择 | 点击标记可删除</text>
+    </view>
+    <view class="map-tip simulator-tip" wx:if="{{recordMode === 'gps' && tracking && _simulatorMode}}">
+      <text>🖱️ 模拟器模式：点击地图任意位置模拟移动</text>
+    </view>
+  </view>
+
+  <!-- 统计信息 (GPS模式) -->
+  <view class="stats-card" wx:if="{{recordMode === 'gps'}}">
+    <view class="stat-row">
+      <view class="stat-item">
+        <text class="stat-label">距离</text>
+        <text class="stat-value">{{distance}} km</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-label">时长</text>
+        <text class="stat-value">{{formatDuration(duration)}}</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-label">碳减排</text>
+        <text class="stat-value">{{carbonReduction}} kg</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 统计信息 (选择模式) -->
+  <view class="stats-card" wx:if="{{recordMode === 'select'}}">
+    <view class="stat-row">
+      <view class="stat-item">
+        <text class="stat-label">直线距离</text>
+        <text class="stat-value">{{selectDistance}} km</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-label">预估积分</text>
+        <text class="stat-value">{{selectPoints}} 分</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-label">碳减排</text>
+        <text class="stat-value">{{selectCarbon}} kg</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 位置信息 -->
+  <view class="location-section">
+    <view class="location-item">
+      <text class="location-label">起点</text>
+      <view class="location-input-wrapper">
+        <input style="height: 7rpx; display: block; box-sizing: border-box" 
+          class="location-input" 
+          placeholder="{{recordMode === 'gps' ? '自动获取' : '点击地图选择'}}" 
+          value="{{startLocation}}" 
+          disabled="{{recordMode === 'gps'}}"
+          bindinput="onStartLocationInput"
+        />
+        <view class="location-action" wx:if="{{recordMode === 'select'}}" bindtap="selectStartLocation">
+          <text class="action-icon">📍</text>
+        </view>
+      </view>
+    </view>
+    <view class="location-item">
+      <text class="location-label">终点</text>
+      <view class="location-input-wrapper">
+        <input style="height: 6rpx; display: block; box-sizing: border-box" 
+          class="location-input" 
+          placeholder="{{recordMode === 'gps' ? '自动获取' : '点击地图选择'}}" 
+          value="{{endLocation}}" 
+          disabled="{{recordMode === 'gps'}}"
+          bindinput="onEndLocationInput"
+        />
+        <view class="location-action" wx:if="{{recordMode === 'select'}}" bindtap="selectEndLocation">
+          <text class="action-icon">📍</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 控制按钮 (GPS模式) -->
+  <view class="button-group" wx:if="{{recordMode === 'gps'}}">
+    <button class="btn btn-start" bindtap="startTracking" wx:if="{{!tracking}}">开始记录</button>
+    <view class="btn-row" wx:else>
+      <button class="btn btn-pause" bindtap="pauseTracking" wx:if="{{!paused}}">暂停</button>
+      <button class="btn btn-resume" bindtap="resumeTracking" wx:if="{{paused}}">继续</button>
+      <button class="btn btn-stop" bindtap="stopTracking">结束</button>
+    </view>
+  </view>
+
+  <!-- 控制按钮 (选择模式) -->
+  <view class="button-group" wx:if="{{recordMode === 'select'}}">
+    <button class="btn btn-primary" bindtap="useCurrentLocation" wx:if="{{!startPoint.latitude}}">使用当前位置作为起点</button>
+    <button class="btn btn-primary" bindtap="useCurrentLocation" wx:elif="{{!endPoint.latitude}}">使用当前位置作为终点</button>
+    <view class="btn-row" wx:else>
+      <button class="btn btn-reset" bindtap="resetSelection">重新选择</button>
+      <button class="btn btn-submit" bindtap="submitSelectRecord">提交记录</button>
+    </view>
+  </view>
+
+  <view class="bottom-space"></view>
+</view>

@@ -1,0 +1,44 @@
+<view class="page">
+  <view class="header">
+    <text class="header-title">我的兑换</text>
+  </view>
+  
+  <view class="tab-bar">
+    <view class="tab {{currentTab === 0 ? 'active' : ''}}" data-tab="0" bindtap="switchTab">全部</view>
+    <view class="tab {{currentTab === 1 ? 'active' : ''}}" data-tab="1" bindtap="switchTab">待处理</view>
+    <view class="tab {{currentTab === 2 ? 'active' : ''}}" data-tab="2" bindtap="switchTab">已完成</view>
+  </view>
+
+  <scroll-view scroll-y class="order-list">
+    <block wx:for="{{filteredOrders}}" wx:key="id">
+      <view class="order-card" data-id="{{item.id}}" bindtap="viewDetail">
+        <view class="card-header">
+          <text class="order-no">订单号: {{item.orderNo}}</text>
+          <text class="order-status status-{{item.status}}">
+            <text wx:if="{{item.status === 2}}">已完成</text>
+            <text wx:elif="{{item.status === 3}}">已拒绝</text>
+            <text wx:elif="{{item.status === 1}}">已发货</text>
+            <text wx:else>待处理</text>
+          </text>
+        </view>
+        <view class="card-body">
+          <text class="product-name">{{item.productName}}</text>
+          <view class="product-info">
+            <text class="product-price">{{item.pointsSpent}} 积分</text>
+            <text class="product-quantity">x{{item.quantity}}</text>
+          </view>
+        </view>
+        <view class="card-footer">
+          <text class="order-time">{{item.createdAt}}</text>
+          <view class="card-action">查看详情 ›</view>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+
+  <view class="empty" wx:if="{{filteredOrders.length === 0}}">
+    <text class="empty-icon">📦</text>
+    <text class="empty-text">暂无兑换记录</text>
+    <text class="empty-hint">快去商城兑换心仪的商品吧</text>
+  </view>
+</view>

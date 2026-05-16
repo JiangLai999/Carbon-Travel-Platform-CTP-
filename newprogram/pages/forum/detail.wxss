@@ -1,0 +1,227 @@
+.page {
+  padding: var(--spacing-lg);
+  padding-bottom: 120rpx;
+  background: var(--bg-page);
+  min-height: 100vh;
+}
+
+.post-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.post-title {
+  font-size: 36rpx;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: var(--spacing-md);
+  line-height: 1.4;
+}
+
+.post-content {
+  font-size: var(--font-lg);
+  color: var(--text-secondary);
+  line-height: 1.8;
+  display: block;
+  margin-bottom: var(--spacing-lg);
+}
+
+.post-images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-lg);
+}
+
+.post-image {
+  width: calc(33.33% - 8rpx);
+  height: 200rpx;
+  border-radius: 8rpx;
+}
+
+.post-image.single {
+  width: 100%;
+  height: 400rpx;
+}
+
+.post-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
+
+.author-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.author-avatar {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  background: var(--primary-color);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-sm);
+  font-weight: 600;
+}
+
+.author-name {
+  font-size: var(--font-md);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.time {
+  font-size: var(--font-xs);
+  color: var(--text-placeholder);
+}
+
+.post-stats {
+  display: flex;
+  gap: 32rpx;
+  padding-top: 20rpx;
+  border-top: 1rpx solid var(--border-light);
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 8rpx;
+  padding: var(--spacing-sm) 20rpx;
+  border-radius: var(--radius-xl);
+  background: var(--bg-hover);
+}
+
+.stat-item.liked {
+  background: #fef2f2;
+}
+
+.stat-icon {
+  font-size: var(--font-lg);
+}
+
+.stat-value {
+  font-size: var(--font-xs);
+  color: var(--text-tertiary);
+}
+
+.comments-section {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+}
+
+.section-title {
+  font-size: var(--font-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.comment-item {
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid var(--border-light);
+}
+
+.comment-item:last-child {
+  border-bottom: none;
+}
+
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+}
+
+.comment-user {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.comment-avatar {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 50%;
+  background: var(--bg-hover);
+  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-xs);
+  font-weight: 500;
+}
+
+.comment-author {
+  font-size: var(--font-md);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.comment-time {
+  font-size: var(--font-xs);
+  color: var(--text-placeholder);
+}
+
+.comment-content {
+  font-size: var(--font-lg);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  display: block;
+  padding-left: 52rpx;
+}
+
+.empty {
+  text-align: center;
+  color: var(--text-placeholder);
+  padding: 60rpx 0;
+  font-size: var(--font-md);
+}
+
+.comment-input {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-md) var(--spacing-lg);
+  padding-bottom: calc(var(--spacing-md) + env(safe-area-inset-bottom));
+  background: var(--bg-card);
+  box-shadow: 0 -2rpx 10rpx rgba(0, 0, 0, 0.05);
+}
+
+.comment-input .input {
+  flex: 1;
+  background: var(--bg-hover);
+  border-radius: var(--radius-full);
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: var(--font-lg);
+  color: var(--text-primary);
+}
+
+.btn-send {
+  margin-left: var(--spacing-md);
+  background: var(--text-disabled);
+  color: #fff;
+  font-size: var(--font-lg);
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  padding: var(--spacing-md) 32rpx;
+  border: none;
+  line-height: 1.5;
+}
+
+.btn-send.active {
+  background: var(--primary-color);
+}

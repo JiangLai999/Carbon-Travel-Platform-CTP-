@@ -1,0 +1,218 @@
+<view class="page">
+  <!-- 背景 -->
+  <view class="page-bg"></view>
+
+  <!-- 用户信息区 -->
+  <view class="profile-section">
+    <view class="profile-card">
+      <view class="profile-top">
+        <view class="avatar-wrap" wx:if="{{userInfo.avatar}}">
+          <image class="avatar" src="{{userInfo.avatar}}" mode="aspectFill" />
+        </view>
+        <view class="avatar-placeholder" wx:else>
+          <text class="avatar-text">{{userInfo.nickname ? userInfo.nickname[0] : '我'}}</text>
+        </view>
+        <view class="profile-info">
+          <text class="user-name">{{userInfo.nickname || '低碳用户'}}</text>
+          <view class="level-badge">
+            <text class="level-icon">🌿</text>
+            <text class="level-text">{{userLevel}}</text>
+          </view>
+        </view>
+        <view class="edit-btn" bindtap="goEditProfile">
+          <text class="edit-icon">✏️</text>
+        </view>
+      </view>
+
+      <!-- 用户基本信息 -->
+      <view class="user-info-row">
+        <view class="info-item">
+          <text class="info-label">用户编号</text>
+          <text class="info-value">{{userInfo.id || '-'}}</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">手机号</text>
+          <text class="info-value">{{userInfo.phone || '-'}}</text>
+        </view>
+      </view>
+
+      <!-- 数据统计 -->
+      <view class="stats-row">
+        <view class="stat-item" bindtap="goMyTrips">
+          <text class="stat-value">{{stats.travelCount || 0}}</text>
+          <text class="stat-label">出行次数</text>
+        </view>
+        <view class="stat-divider"></view>
+        <view class="stat-item" bindtap="goPoints">
+          <text class="stat-value highlight">{{stats.availablePoints || 0}}</text>
+          <text class="stat-label">可用积分</text>
+        </view>
+        <view class="stat-divider"></view>
+        <view class="stat-item">
+          <text class="stat-value">{{stats.totalCarbon || '0.00'}}</text>
+          <text class="stat-label">减碳(kg)</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 更多统计信息 -->
+  <view class="stats-section">
+    <view class="stats-grid">
+      <view class="stats-card">
+        <text class="stats-icon">🎯</text>
+        <view class="stats-info">
+          <text class="stats-value">{{stats.activityCount || 0}}</text>
+          <text class="stats-label">参与活动</text>
+        </view>
+      </view>
+      <view class="stats-card">
+        <text class="stats-icon">🎁</text>
+        <view class="stats-info">
+          <text class="stats-value">{{stats.orderCount || 0}}</text>
+          <text class="stats-label">兑换商品</text>
+        </view>
+      </view>
+      <view class="stats-card">
+        <text class="stats-icon">📝</text>
+        <view class="stats-info">
+          <text class="stats-value">{{stats.postCount || 0}}</text>
+          <text class="stats-label">发帖数量</text>
+        </view>
+      </view>
+      <view class="stats-card">
+        <text class="stats-icon">🏆</text>
+        <view class="stats-info">
+          <text class="stats-value">{{stats.rank || '-'}}</text>
+          <text class="stats-label">积分排名</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 功能菜单 -->
+  <view class="menu-section">
+    <view class="section-title">我的服务</view>
+    <view class="menu-grid">
+      <view class="menu-item" bindtap="goMyTrips">
+        <view class="menu-icon-wrap green">
+          <text class="menu-icon">🗺️</text>
+        </view>
+        <text class="menu-label">我的行程</text>
+      </view>
+      <view class="menu-item" bindtap="goPoints">
+        <view class="menu-icon-wrap orange">
+          <text class="menu-icon">💰</text>
+        </view>
+        <text class="menu-label">积分中心</text>
+      </view>
+      <view class="menu-item" bindtap="goMyActivities">
+        <view class="menu-icon-wrap blue">
+          <text class="menu-icon">🎯</text>
+        </view>
+        <text class="menu-label">我的活动</text>
+      </view>
+      <view class="menu-item" bindtap="goMyPosts">
+        <view class="menu-icon-wrap purple">
+          <text class="menu-icon">📝</text>
+        </view>
+        <text class="menu-label">我的帖子</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 账户信息 -->
+  <view class="menu-section">
+    <view class="section-title-light">账户信息</view>
+    <view class="menu-list">
+      <view class="menu-row" bindtap="goEditProfile">
+        <view class="menu-row-left">
+          <view class="menu-row-icon">👤</view>
+          <text class="menu-row-label">个人资料</text>
+        </view>
+        <view class="menu-row-right">
+          <text class="menu-row-desc">{{userInfo.nickname || '未设置'}}</text>
+          <text class="menu-row-arrow">›</text>
+        </view>
+      </view>
+      <view class="menu-row">
+        <view class="menu-row-left">
+          <view class="menu-row-icon">🆔</view>
+          <text class="menu-row-label">真实姓名</text>
+        </view>
+        <view class="menu-row-right">
+          <text class="menu-row-desc">{{userInfo.realName || '未认证'}}</text>
+        </view>
+      </view>
+      <view class="menu-row">
+        <view class="menu-row-left">
+          <view class="menu-row-icon">💳</view>
+          <text class="menu-row-label">身份证号</text>
+        </view>
+        <view class="menu-row-right">
+          <text class="menu-row-desc">{{userInfo.idCardMasked || '未认证'}}</text>
+        </view>
+      </view>
+      <view class="menu-row">
+        <view class="menu-row-left">
+          <view class="menu-row-icon">📧</view>
+          <text class="menu-row-label">邮箱</text>
+        </view>
+        <view class="menu-row-right">
+          <text class="menu-row-desc">{{userInfo.email || '未设置'}}</text>
+        </view>
+      </view>
+      <view class="menu-row">
+        <view class="menu-row-left">
+          <view class="menu-row-icon">🏷️</view>
+          <text class="menu-row-label">用户角色</text>
+        </view>
+        <view class="menu-row-right">
+          <text class="menu-row-tag {{userInfo.role === 'admin' ? 'admin' : 'user'}}">{{userInfo.role === 'admin' ? '管理员' : '普通用户'}}</text>
+        </view>
+      </view>
+      <view class="menu-row">
+        <view class="menu-row-left">
+          <view class="menu-row-icon">📊</view>
+          <text class="menu-row-label">账户状态</text>
+        </view>
+        <view class="menu-row-right">
+          <text class="menu-row-tag {{userInfo.status === 1 ? 'active' : 'inactive'}}">{{userInfo.status === 1 ? '正常' : '已禁用'}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 其他 -->
+  <view class="menu-section">
+    <view class="section-title-light">其他</view>
+    <view class="menu-list">
+      <view class="menu-row" bindtap="goMessages">
+        <view class="menu-row-left">
+          <view class="menu-row-icon">🔔</view>
+          <text class="menu-row-label">消息通知</text>
+        </view>
+        <view class="menu-row-right">
+          <view class="unread-badge" wx:if="{{unreadCount > 0}}">{{unreadCount > 99 ? '99+' : unreadCount}}</view>
+          <text class="menu-row-arrow">›</text>
+        </view>
+      </view>
+      <view class="menu-row" bindtap="goSettings">
+        <view class="menu-row-left">
+          <view class="menu-row-icon">⚙️</view>
+          <text class="menu-row-label">设置</text>
+        </view>
+        <view class="menu-row-right">
+          <text class="menu-row-arrow">›</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 退出按钮 -->
+  <view class="logout-section">
+    <view class="logout-btn" bindtap="onLogout">退出登录</view>
+  </view>
+
+  <view class="bottom-safe"></view>
+</view>

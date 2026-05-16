@@ -1,0 +1,88 @@
+<view class="page">
+  <view class="header">
+    <view class="back-btn" bindtap="goBack">
+      <text class="back-icon">←</text>
+    </view>
+    <text class="header-title">订单详情</text>
+    <view class="header-right"></view>
+  </view>
+
+  <scroll-view scroll-y class="content">
+    <!-- 状态卡片 -->
+    <view class="status-card">
+      <view class="status-icon" wx:if="{{order.status === 1}}">✓</view>
+      <view class="status-icon" wx:elif="{{order.status === 2}}">✕</view>
+      <view class="status-icon" wx:else>⏳</view>
+      <view class="status-info">
+        <text class="status-text" wx:if="{{order.status === 2}}">已完成</text>
+        <text class="status-text" wx:elif="{{order.status === 3}}">已拒绝</text>
+        <text class="status-text" wx:elif="{{order.status === 1}}">已发货</text>
+        <text class="status-text" wx:else>待处理</text>
+        <text class="status-desc" wx:if="{{order.status === 2}}">您的订单已完成，感谢您的参与</text>
+        <text class="status-desc" wx:elif="{{order.status === 3}}">您的订单已被拒绝</text>
+        <text class="status-desc" wx:elif="{{order.status === 1}}">您的订单已发货，请注意查收</text>
+        <text class="status-desc" wx:else>管理员正在处理您的订单</text>
+      </view>
+    </view>
+
+    <!-- 商品信息 -->
+    <view class="section">
+      <text class="section-title">商品信息</text>
+      <view class="info-card">
+        <view class="info-item">
+          <text class="info-label">商品名称</text>
+          <text class="info-value">{{order.productName || '-'}}</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">消耗积分</text>
+          <text class="info-value points">{{order.pointsSpent || 0}}</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">兑换数量</text>
+          <text class="info-value">{{order.quantity || 1}}件</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 订单信息 -->
+    <view class="section">
+      <text class="section-title">订单信息</text>
+      <view class="info-card">
+        <view class="info-item">
+          <text class="info-label">订单编号</text>
+          <text class="info-value no">{{order.orderNo || '-'}}</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">下单时间</text>
+          <text class="info-value">{{order.createdAt || '-'}}</text>
+        </view>
+        <view class="info-item">
+          <text class="info-label">订单状态</text>
+          <text class="info-value">
+            <text wx:if="{{order.status === 2}}">已完成</text>
+            <text wx:elif="{{order.status === 3}}">已拒绝</text>
+            <text wx:elif="{{order.status === 1}}">已发货</text>
+            <text wx:else>待处理</text>
+          </text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 收货信息 -->
+    <view class="section">
+      <text class="section-title">收货信息</text>
+      <view class="info-card">
+        <view class="info-item address-item">
+          <text class="info-label">收货地址</text>
+          <text class="info-value address">{{order.deliveryAddress || '未填写'}}</text>
+        </view>
+        <view class="info-item" wx:if="{{order.deliveryNo}}">
+          <text class="info-label">快递单号</text>
+          <text class="info-value tracking">{{order.deliveryNo}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="bottom-safe"></view>
+  </scroll-view>
+</view>

@@ -1,0 +1,309 @@
+page {
+  background: var(--bg-page);
+}
+
+.page {
+  min-height: 100vh;
+  background: var(--bg-page);
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  background: var(--bg-card);
+  padding: var(--spacing-lg) 32rpx;
+  border-bottom: 1rpx solid var(--border-light);
+}
+
+.header-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.section {
+  background: var(--bg-card);
+  margin: var(--spacing-md) var(--spacing-lg) 0;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+}
+
+.section-label {
+  font-size: var(--font-md);
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: var(--spacing-md);
+}
+
+/* 记录模式选择 */
+.record-mode-grid {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.record-mode-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+  padding: var(--spacing-lg) var(--spacing-md);
+  border-radius: var(--radius-sm);
+  border: 2rpx solid var(--border-color);
+  background: var(--bg-card);
+  transition: all 0.3s ease;
+}
+
+.record-mode-item.active {
+  border-color: var(--primary-color);
+  background: linear-gradient(135deg, var(--primary-bg) 0%, var(--primary-bg-light) 100%);
+  box-shadow: 0 4rpx 12rpx var(--primary-15);
+}
+
+.mode-icon {
+  font-size: 48rpx;
+}
+
+.mode-text {
+  font-size: var(--font-lg);
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.record-mode-item.active .mode-text {
+  color: var(--primary-dark);
+}
+
+.mode-desc {
+  font-size: var(--font-xs);
+  color: var(--text-placeholder);
+}
+
+.record-mode-item.active .mode-desc {
+  color: var(--primary-color);
+}
+
+/* 出行方式选择 */
+.mode-grid {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.mode-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+  padding: var(--spacing-md) 8rpx;
+  border-radius: var(--radius-sm);
+  border: 2rpx solid var(--border-color);
+  background: var(--bg-card);
+}
+
+.mode-item.active {
+  border-color: var(--primary-color);
+  background: var(--primary-bg);
+}
+
+.mode-emoji {
+  font-size: 36rpx;
+}
+
+.mode-name {
+  font-size: var(--font-xs);
+  color: var(--text-secondary);
+}
+
+.mode-item.active .mode-name {
+  color: var(--primary-color);
+  font-weight: 600;
+}
+
+/* 地图区域 */
+.map-section {
+  margin: var(--spacing-md) var(--spacing-lg) 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+}
+
+.map {
+  width: 100%;
+  height: 450rpx;
+}
+
+.map-tip {
+  position: absolute;
+  bottom: var(--spacing-md);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-xl);
+  font-size: var(--font-sm);
+  white-space: nowrap;
+}
+
+.map-tip.simulator-tip {
+  background: rgba(245, 158, 11, 0.9);
+  color: #fff;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.9; }
+  50% { opacity: 1; }
+}
+
+/* 统计信息 */
+.stats-card {
+  background: var(--bg-card);
+  margin: var(--spacing-md) var(--spacing-lg) 0;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-around;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.stat-label {
+  font-size: var(--font-xs);
+  color: var(--text-placeholder);
+}
+
+.stat-value {
+  font-size: var(--font-2xl);
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+/* 位置信息 */
+.location-section {
+  background: var(--bg-card);
+  margin: var(--spacing-md) var(--spacing-lg) 0;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.location-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.location-label {
+  font-size: var(--font-md);
+  color: var(--text-secondary);
+  font-weight: 600;
+  width: 60rpx;
+  flex-shrink: 0;
+}
+
+.location-input-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.location-input {
+  flex: 1;
+  font-size: var(--font-md);
+  color: var(--text-tertiary);
+  background: var(--bg-input);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: 8rpx;
+}
+
+.location-action {
+  width: 48rpx;
+  height: 48rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--primary-bg);
+  border-radius: 8rpx;
+}
+
+.action-icon {
+  font-size: var(--font-sm);
+}
+
+/* 按钮组 */
+.button-group {
+  margin: var(--spacing-lg) var(--spacing-lg) 0;
+}
+
+.btn {
+  height: 96rpx;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-xl);
+  font-weight: 700;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-start {
+  width: 100%;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  color: #fff;
+  box-shadow: var(--shadow-primary);
+}
+
+.btn-primary {
+  width: 100%;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  color: #fff;
+  box-shadow: var(--shadow-primary);
+}
+
+.btn-row {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.btn-pause, .btn-resume {
+  flex: 1;
+  background: var(--bg-hover);
+  color: var(--text-secondary);
+}
+
+.btn-stop {
+  flex: 1;
+  background: linear-gradient(135deg, var(--error-color) 0%, var(--error-text) 100%);
+  color: #fff;
+}
+
+.btn-reset {
+  flex: 1;
+  background: var(--bg-hover);
+  color: var(--text-secondary);
+}
+
+.btn-submit {
+  flex: 2;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  color: #fff;
+  box-shadow: var(--shadow-primary);
+}
+
+.bottom-space {
+  height: 40rpx;
+}

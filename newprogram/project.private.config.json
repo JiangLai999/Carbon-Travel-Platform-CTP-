@@ -1,0 +1,57 @@
+{
+  "libVersion": "3.15.0",
+  "setting": {
+    "checkSiteMap": false,
+    "checkInvalidKey": false,
+    "checkConvertUrlProtocol": true,
+    "showShadowRootInWxmlPanel": true,
+    "disableUseStrict": false,
+    "useCompilerPlugins": false,
+    "ignoreDevUnusedFiles": false,
+    "ignoreUploadUnusedFiles": false,
+    "showES6CompileModule": false,
+    "useIsolateContext": true,
+    "useDebuggerExtension": false,
+    "useApiHook": true,
+    "useApiHostProcess": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "presets": null,
+      "plugins": null
+    },
+    "enableEngineNative": false,
+    "enableNormalVirtualHost": false,
+    "useCustomBase": false,
+    "newFeature": true,
+    "autoAudits": false,
+    "checkGameTsx": false,
+    "checkGameJs": false,
+    "uploadWithSourceMap": true,
+    "compileHotReLoad": true,
+    "lazyloadPlaceholderEnable": false,
+    "useMultiFrameRuntime": true,
+    "minifyWXSS": true,
+    "minifyWXML": true,
+    "minifyJS": true,
+    "urlCheck": false,
+    "coverView": false,
+    "skylineRenderEnable": false,
+    "preloadBackgroundData": false,
+    "useStaticServer": false,
+    "useLanDebug": false,
+    "showES6CompileOption": false,
+    "bigPackageSizeSupport": false
+  },
+  "condition": {
+    "search": {
+      "current": -1,
+      "list": []
+    },
+    "conversation": {
+      "current": -1,
+      "list": []
+    }
+  },
+  "projectname": "newprogram"
+}

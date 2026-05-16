@@ -1,0 +1,39 @@
+<view class="page">
+  <view class="section">
+    <text class="section-title">参与凭证</text>
+    <text class="section-desc">请上传参与活动的照片作为凭证</text>
+    
+    <view class="image-list">
+      <view class="image-item" wx:for="{{images}}" wx:key="index">
+        <image class="preview" src="{{item}}" mode="aspectFill" />
+        <view class="delete-btn" catchtap="deleteImage" data-index="{{index}}">×</view>
+      </view>
+      <view class="add-image" wx:if="{{images.length < 3}}" bindtap="chooseImage">
+        <text class="add-icon">+</text>
+        <text class="add-text">添加图片</text>
+      </view>
+    </view>
+    <text class="image-count">{{images.length}}/3</text>
+  </view>
+
+  <view class="section">
+    <text class="section-title">补充说明</text>
+    <textarea 
+      class="textarea" 
+      placeholder="描述你的参与情况..." 
+      value="{{description}}" 
+      bindinput="onInput"
+      maxlength="500"
+    />
+    <text class="char-count">{{description.length}}/500</text>
+  </view>
+
+  <view class="tips">
+    <text class="tips-title">💡 温馨提示</text>
+    <text class="tips-item">• 请上传真实有效的参与凭证</text>
+    <text class="tips-item">• 图片清晰，内容可辨认</text>
+    <text class="tips-item">• 审核通过后将获得相应积分</text>
+  </view>
+
+  <button class="btn-submit" bindtap="submit">提交凭证</button>
+</view>

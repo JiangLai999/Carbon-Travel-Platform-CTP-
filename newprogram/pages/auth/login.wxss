@@ -1,0 +1,277 @@
+page {
+  background: var(--bg-card);
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ========== 背景装饰 ========== */
+.bg-decoration {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bg-circle {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.circle-1 {
+  width: 400rpx;
+  height: 400rpx;
+  background: linear-gradient(135deg, var(--primary-15) 0%, var(--primary-5) 100%);
+  top: -100rpx;
+  right: -100rpx;
+}
+
+.circle-2 {
+  width: 300rpx;
+  height: 300rpx;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+  bottom: 200rpx;
+  left: -80rpx;
+}
+
+/* ========== 头部 ========== */
+.header {
+  padding: var(--spacing-md) var(--spacing-lg);
+  padding-top: calc(env(safe-area-inset-top) + var(--spacing-md));
+}
+
+.back-btn {
+  width: 72rpx;
+  height: 72rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 50%;
+}
+
+.back-btn:active {
+  opacity: 0.6;
+}
+
+.back-icon {
+  font-size: 36rpx;
+  color: var(--text-secondary);
+}
+
+/* ========== Hero区域 ========== */
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40rpx var(--spacing-lg) 60rpx;
+}
+
+.hero-icon-wrap {
+  width: 140rpx;
+  height: 140rpx;
+  background: linear-gradient(135deg, var(--primary-bg) 0%, var(--primary-bg-light) 100%);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--spacing-lg);
+  box-shadow: 0 12rpx 32rpx var(--primary-20);
+}
+
+.hero-icon {
+  font-size: 72rpx;
+}
+
+.hero-title {
+  font-size: 52rpx;
+  font-weight: 900;
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: var(--spacing-sm);
+  letter-spacing: -1rpx;
+}
+
+.hero-subtitle {
+  font-size: var(--font-lg);
+  color: var(--text-placeholder);
+  display: block;
+}
+
+/* ========== 登录方式切换 ========== */
+.tab-bar {
+  position: relative;
+  display: flex;
+  margin: 0 48rpx;
+  background: var(--bg-hover);
+  border-radius: var(--radius-lg);
+  padding: 6rpx;
+}
+
+.tab-item {
+  flex: 1;
+  text-align: center;
+  padding: 18rpx 0;
+  font-size: var(--font-lg);
+  color: var(--text-tertiary);
+  font-weight: 500;
+  border-radius: var(--radius-sm);
+  transition: all 0.3s;
+  z-index: 1;
+}
+
+.tab-item.active {
+  color: #fff;
+  font-weight: 600;
+}
+
+.tab-indicator {
+  position: absolute;
+  top: 6rpx;
+  width: 50%;
+  height: calc(100% - 12rpx);
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  border-radius: var(--radius-sm);
+  transition: left 0.3s ease;
+}
+
+/* ========== 表单区域 ========== */
+.form-section {
+  padding: 48rpx 48rpx 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-wrap {
+  display: flex;
+  align-items: center;
+  background: var(--bg-input);
+  border: 2rpx solid var(--border-color);
+  border-radius: var(--radius-xl);
+  height: 108rpx;
+  padding: 0 var(--spacing-lg);
+  gap: var(--spacing-md);
+  transition: all 0.2s;
+}
+
+.input-wrap:focus-within {
+  border-color: var(--primary-color);
+  background: var(--bg-card);
+  box-shadow: 0 0 0 4rpx var(--primary-10);
+}
+
+.input-icon {
+  font-size: var(--font-xl);
+}
+
+.input-field {
+  flex: 1;
+  font-size: var(--font-xl);
+  color: var(--text-primary);
+  background: transparent;
+}
+
+.input-field::placeholder {
+  color: var(--text-disabled);
+}
+
+.eye-btn {
+  background: none;
+  border: none;
+  padding: 8rpx;
+  font-size: var(--font-xl);
+}
+
+.code-btn {
+  flex-shrink: 0;
+  font-size: var(--font-sm);
+  font-weight: 600;
+  color: var(--primary-color);
+  white-space: nowrap;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--primary-bg);
+  border-radius: var(--radius-sm);
+}
+
+.code-btn.disabled {
+  color: var(--text-placeholder);
+  background: var(--bg-hover);
+}
+
+/* ========== 登录按钮 ========== */
+.btn-login {
+  height: 108rpx;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  color: #fff;
+  border-radius: var(--radius-xl);
+  font-size: var(--font-xl);
+  font-weight: 700;
+  border: none;
+  box-shadow: var(--shadow-primary);
+  margin-top: var(--spacing-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-login:active {
+  opacity: 0.9;
+  transform: scale(0.98);
+}
+
+/* ========== 底部链接 ========== */
+.footer-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-lg) 0;
+}
+
+.link-text {
+  font-size: var(--font-sm);
+  color: var(--primary-color);
+  font-weight: 500;
+}
+
+.link-divider {
+  font-size: var(--font-sm);
+  color: var(--border-color);
+}
+
+/* ========== 协议 ========== */
+.agreement {
+  position: absolute;
+  bottom: calc(env(safe-area-inset-bottom) + 40rpx);
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4rpx;
+  padding: 0 var(--spacing-lg);
+}
+
+.agreement-text {
+  font-size: var(--font-xs);
+  color: var(--text-placeholder);
+}
+
+.agreement-link {
+  font-size: var(--font-xs);
+  color: var(--primary-color);
+}

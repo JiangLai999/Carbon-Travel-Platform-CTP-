@@ -1,0 +1,134 @@
+<view class="page">
+  <!-- 加载中 -->
+  <view class="loading-state" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text class="loading-text">加载中...</text>
+  </view>
+
+  <!-- 详情内容 -->
+  <block wx:if="{{!loading && trip}}">
+    <!-- 顶部状态卡片 -->
+    <view class="status-card">
+      <view class="status-icon">{{trip.modeIcon}}</view>
+      <view class="status-info">
+        <text class="status-name">{{trip.travelModeName}}</text>
+        <view class="status-badge {{trip.statusClass}}">
+          <text>{{trip.statusText}}</text>
+        </view>
+      </view>
+      <view class="status-date">
+        <text class="date-text">{{trip.dateStr}}</text>
+        <text class="time-text">{{trip.timeStr}}</text>
+      </view>
+    </view>
+
+    <!-- 轨迹地图（有轨迹点时显示） -->
+    <view class="section" wx:if="{{hasTrackPoints}}">
+      <view class="section-title">
+        <text>轨迹地图</text>
+        <text class="track-badge">🛤️ 有轨迹</text>
+      </view>
+      <view class="map-container">
+        <map
+          id="trackMap"
+          class="track-map"
+          latitude="{{mapLatitude}}"
+          longitude="{{mapLongitude}}"
+          scale="{{mapScale}}"
+          markers="{{mapMarkers}}"
+          polyline="{{mapPolyline}}"
+          show-location="false"
+          enable-zoom="true"
+          enable-scroll="true"
+          enable-rotate="false"
+        />
+      </view>
+      <view class="track-stats">
+        <view class="track-stat">
+          <text class="track-stat-num">{{trip.trackPoints.length}}</text>
+          <text class="track-stat-label">轨迹点</text>
+        </view>
+        <view class="track-stat">
+          <text class="track-stat-num">{{trip.durationStr}}</text>
+          <text class="track-stat-label">用时</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 路线信息 -->
+    <view class="section">
+      <view class="section-title">行程路线</view>
+      <view class="route-card">
+        <view class="route-item">
+          <view class="route-dot start"></view>
+          <view class="route-content">
+            <text class="route-label">出发地</text>
+            <text class="route-value">{{trip.startLocation || '未知位置'}}</text>
+          </view>
+        </view>
+        <view class="route-line"></view>
+        <view class="route-item">
+          <view class="route-dot end"></view>
+          <view class="route-content">
+            <text class="route-label">目的地</text>
+            <text class="route-value">{{trip.endLocation || '未知位置'}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 数据统计 -->
+    <view class="section">
+      <view class="section-title">行程数据</view>
+      <view class="stats-grid">
+        <view class="stat-box">
+          <text class="stat-num">{{trip.distance}}</text>
+          <text class="stat-unit">km</text>
+          <text class="stat-label">出行距离</text>
+        </view>
+        <view class="stat-box">
+          <text class="stat-num carbon">{{trip.carbonReduction}}</text>
+          <text class="stat-unit">kg</text>
+          <text class="stat-label">碳减排量</text>
+        </view>
+        <view class="stat-box" wx:if="{{trip.pointsEarned > 0}}">
+          <text class="stat-num points">+{{trip.pointsEarned}}</text>
+          <text class="stat-unit">分</text>
+          <text class="stat-label">获得积分</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 信息项 -->
+    <view class="section">
+      <view class="section-title">详细信息</view>
+      <view class="info-card">
+        <view class="info-row">
+          <text class="info-label">记录编号</text>
+          <text class="info-value">{{trip.id}}</text>
+        </view>
+        <view class="info-row">
+          <text class="info-label">出行方式</text>
+          <text class="info-value">{{trip.travelModeName}}</text>
+        </view>
+        <view class="info-row">
+          <text class="info-label">提交时间</text>
+          <text class="info-value">{{trip.createdAt}}</text>
+        </view>
+        <view class="info-row" wx:if="{{trip.updatedAt}}">
+          <text class="info-label">更新时间</text>
+          <text class="info-value">{{trip.updatedAt}}</text>
+        </view>
+      </view>
+    </view>
+  </block>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{!loading && !trip}}">
+    <text class="empty-icon">📭</text>
+    <text class="empty-text">未找到行程记录</text>
+    <button class="btn-back" bindtap="goBack">返回</button>
+  </view>
+
+  <view class="bottom-safe"></view>
+</view>

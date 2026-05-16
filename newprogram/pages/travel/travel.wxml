@@ -1,0 +1,115 @@
+<view class="page">
+  <!-- 头部 -->
+  <view class="header">
+    <view class="header-bg"></view>
+    <view class="header-content">
+      <text class="header-title">出行记录</text>
+      <text class="header-subtitle">记录每一次绿色出行</text>
+    </view>
+  </view>
+
+  <scroll-view scroll-y class="scroll-content" enhanced show-scrollbar="{{false}}">
+    <!-- 出行方式 -->
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">选择出行方式</text>
+      </view>
+      <view class="mode-grid">
+        <view class="mode-item {{selectedMode === item.id ? 'active' : ''}}" wx:for="{{travelModes}}" wx:key="id" bindtap="selectMode" data-mode="{{item.id}}">
+          <view class="mode-icon-wrap">
+            <text class="mode-emoji">{{item.icon}}</text>
+          </view>
+          <text class="mode-name">{{item.name}}</text>
+          <view class="mode-check" wx:if="{{selectedMode === item.id}}">✓</view>
+        </view>
+      </view>
+    </view>
+
+    <!-- 填写信息 -->
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">行程信息</text>
+      </view>
+      <view class="form-card">
+        <view class="form-row">
+          <view class="form-icon start">起</view>
+          <input class="form-input" placeholder="请输入出发地" value="{{form.startLocation}}" bindinput="onInput" data-field="startLocation" />
+        </view>
+        <view class="form-connector"></view>
+        <view class="form-row">
+          <view class="form-icon end">终</view>
+          <input class="form-input" placeholder="请输入目的地" value="{{form.endLocation}}" bindinput="onInput" data-field="endLocation" />
+        </view>
+        <view class="form-divider"></view>
+        <view class="form-row">
+          <view class="form-icon distance">📏</view>
+          <input class="form-input" placeholder="输入出行距离" type="digit" value="{{form.distance}}" bindinput="onInput" data-field="distance" />
+          <text class="form-unit">km</text>
+        </view>
+      </view>
+
+      <!-- 预计收益 -->
+      <view class="preview-card" wx:if="{{form.distance > 0}}">
+        <view class="preview-item">
+          <text class="preview-label">预计减碳</text>
+          <text class="preview-value carbon">{{estimatedCarbon}} kg</text>
+        </view>
+        <view class="preview-divider"></view>
+        <view class="preview-item">
+          <text class="preview-label">预计积分</text>
+          <text class="preview-value points">+{{estimatedPoints}}</text>
+        </view>
+      </view>
+
+      <view class="button-group">
+        <button class="btn-primary" bindtap="submitRecord">
+          <text class="btn-icon">📤</text>
+          <text>提交记录</text>
+        </button>
+        <button class="btn-secondary" bindtap="goTrack">
+          <text class="btn-icon">📍</text>
+          <text>GPS轨迹</text>
+        </button>
+      </view>
+    </view>
+
+    <!-- 历史记录 -->
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">历史记录</text>
+        <view class="section-more" bindtap="goMyTrips">
+          <text>查看全部</text>
+          <text class="arrow">›</text>
+        </view>
+      </view>
+      <view class="record-list" wx:if="{{records.length > 0}}">
+        <view class="record-item" wx:for="{{records}}" wx:key="id">
+          <view class="record-left">
+            <view class="record-mode-icon">{{item.travelModeName}}</view>
+            <view class="record-info">
+              <view class="record-route">
+                <text class="route-text">{{item.startLocation}}</text>
+                <text class="route-arrow">→</text>
+                <text class="route-text">{{item.endLocation}}</text>
+              </view>
+              <text class="record-time">{{item.createdAt}}</text>
+            </view>
+          </view>
+          <view class="record-right">
+            <view class="status-badge {{item.status === 1 ? 'approved' : item.status === 2 ? 'rejected' : 'pending'}}">
+              <text>{{item.status === 1 ? '已通过' : item.status === 2 ? '已驳回' : '待审核'}}</text>
+            </view>
+            <text class="record-points" wx:if="{{item.pointsEarned > 0}}">+{{item.pointsEarned}}分</text>
+          </view>
+        </view>
+      </view>
+      <view class="empty-card" wx:else>
+        <text class="empty-icon">📝</text>
+        <text class="empty-text">暂无出行记录</text>
+        <text class="empty-hint">完成一次出行后将显示在这里</text>
+      </view>
+    </view>
+
+    <view class="bottom-safe"></view>
+  </scroll-view>
+</view>

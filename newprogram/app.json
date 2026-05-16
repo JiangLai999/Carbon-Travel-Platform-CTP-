@@ -1,0 +1,58 @@
+{
+  "pages": [
+    "pages/auth/login",
+    "pages/auth/register",
+    "pages/auth/reset",
+    "pages/index/index",
+    "pages/travel/travel",
+    "pages/travel-track/travel-track",
+    "pages/shop/shop",
+    "pages/shop/detail",
+    "pages/shop/history",
+    "pages/shop/order-detail",
+    "pages/forum/forum",
+    "pages/forum/detail",
+    "pages/forum/create",
+    "pages/user/user",
+    "pages/user/profile",
+    "pages/user/address",
+    "pages/points/points",
+    "pages/activity/activity",
+    "pages/activity/proof",
+    "pages/message/message",
+    "pages/settings/settings",
+    "pages/my-posts/my-posts",
+    "pages/my-trips/my-trips",
+    "pages/travel-detail/travel-detail",
+    "pages/my-activities/my-activities"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "用于记录您的出行轨迹，计算碳减排量"
+    }
+  },
+  "requiredBackgroundModes": ["location"],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "低碳出行",
+    "navigationBarBackgroundColor": "#10b981",
+    "backgroundColor": "#f8fafb"
+  },
+  "tabBar": {
+    "custom": true,
+    "color": "#6b7280",
+    "selectedColor": "#10b981",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "white",
+    "list": [
+      { "pagePath": "pages/index/index", "text": "首页", "iconPath": "assets/icons/home.png", "selectedIconPath": "assets/icons/home_active.png" },
+      { "pagePath": "pages/travel/travel", "text": "出行", "iconPath": "assets/icons/travel.png", "selectedIconPath": "assets/icons/travel_active.png" },
+      { "pagePath": "pages/shop/shop", "text": "商城", "iconPath": "assets/icons/shop.png", "selectedIconPath": "assets/icons/shop_active.png" },
+      { "pagePath": "pages/forum/forum", "text": "论坛", "iconPath": "assets/icons/forum.png", "selectedIconPath": "assets/icons/forum_active.png" },
+      { "pagePath": "pages/user/user", "text": "我的", "iconPath": "assets/icons/user.png", "selectedIconPath": "assets/icons/user_active.png" }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

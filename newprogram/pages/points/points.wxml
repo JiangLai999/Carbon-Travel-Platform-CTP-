@@ -1,0 +1,30 @@
+<view class="page">
+  <view class="header">
+    <text class="header-title">我的积分</text>
+  </view>
+
+  <view class="balance-section">
+    <text class="balance-label">可用积分</text>
+    <text class="balance-value">{{totalPoints}}</text>
+  </view>
+
+  <view class="filters">
+    <view class="filter-item {{activeFilter === item.id ? 'active' : ''}}" wx:for="{{filters}}" wx:key="id" bindtap="selectFilter" data-filter="{{item.id}}">
+      <text>{{item.name}}</text>
+    </view>
+  </view>
+
+  <view class="records-list">
+    <view class="record-item" wx:for="{{filteredRecords}}" wx:key="id">
+      <view class="record-icon {{item.type}}">
+        <text>{{item.type === 'income' ? '＋' : '－'}}</text>
+      </view>
+      <view class="record-info">
+        <text class="record-title">{{item.title}}</text>
+        <text class="record-time">{{item.timeStr}}</text>
+      </view>
+      <text class="record-points {{item.type}}">{{item.type === 'income' ? '+' : '-'}}{{item.points}}分</text>
+    </view>
+    <view wx:if="{{filteredRecords.length === 0}}" class="empty-tip">暂无记录</view>
+  </view>
+</view>

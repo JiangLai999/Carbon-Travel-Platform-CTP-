@@ -1,0 +1,266 @@
+page {
+  background: var(--bg-card);
+}
+
+.page {
+  min-height: 100vh;
+  background: var(--bg-card);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md) var(--spacing-lg);
+}
+
+.back-btn {
+  width: 72rpx;
+  height: 72rpx;
+  border-radius: 0;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  padding: 0;
+  margin-left: -12rpx;
+  cursor: pointer;
+}
+
+.back-btn:active {
+  background: transparent;
+  opacity: 0.6;
+}
+
+.back-icon {
+  font-size: 40rpx;
+  color: var(--primary-color);
+  line-height: 1;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-title {
+  font-size: var(--font-xl);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.header-spacer {
+  width: 72rpx;
+}
+
+/* 步骤指示 */
+.steps {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-md);
+  margin: 32rpx 0;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8rpx;
+}
+
+.step-num {
+  width: 56rpx;
+  height: 56rpx;
+  border-radius: 50%;
+  background: var(--bg-hover);
+  color: var(--text-placeholder);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--font-lg);
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.step.active .step-num {
+  background: var(--primary-color);
+  color: #fff;
+}
+
+.step-label {
+  font-size: var(--font-xs);
+  color: var(--text-placeholder);
+}
+
+.step.active .step-label {
+  color: var(--primary-color);
+}
+
+.step-line {
+  width: 40rpx;
+  height: 3rpx;
+  background: var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.step-line.active {
+  background: var(--primary-color);
+}
+
+/* 容器 */
+.container {
+  flex: 1;
+  padding: 0 32rpx;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 表单 */
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 20rpx;
+  margin-bottom: 32rpx;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.form-label {
+  font-size: var(--font-md);
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: block;
+}
+
+.input-box {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: 0 20rpx;
+  height: 96rpx;
+  background: var(--bg-card);
+  border: 1rpx solid var(--border-color);
+  border-radius: var(--radius-sm);
+}
+
+.input-box:focus-within {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3rpx var(--primary-10);
+}
+
+.input-icon {
+  font-size: var(--font-xl);
+  flex-shrink: 0;
+}
+
+.input-field {
+  flex: 1;
+  font-size: var(--font-lg);
+  color: var(--text-primary);
+  background: transparent;
+  height: 100%;
+}
+
+.input-field::placeholder {
+  color: var(--text-disabled);
+}
+
+/* 验证码行 */
+.sms-box {
+  padding-right: 8rpx;
+}
+
+.sms-btn {
+  background: var(--primary-bg);
+  color: var(--primary-color);
+  border-radius: 10rpx;
+  padding: 0 20rpx;
+  height: 72rpx;
+  border: none;
+  flex-shrink: 0;
+  font-weight: 600;
+}
+
+.sms-btn:active {
+  background: var(--primary-bg-light);
+}
+
+.sms-btn[disabled] {
+  background: var(--bg-hover);
+  color: var(--text-placeholder);
+}
+
+.sms-text {
+  font-size: var(--font-xs);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* 重置按钮 */
+.btn-reset {
+  height: 96rpx;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-xl);
+  font-weight: 700;
+  border: none;
+  margin-top: 8rpx;
+  box-shadow: var(--shadow-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-reset:active {
+  opacity: 0.9;
+}
+
+.btn-text {
+  letter-spacing: 2rpx;
+}
+
+/* 提示 */
+.tips {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) 20rpx;
+  background: var(--primary-bg);
+  border-radius: 10rpx;
+  margin-top: auto;
+  margin-bottom: 40rpx;
+}
+
+.tip-icon {
+  font-size: 32rpx;
+  flex-shrink: 0;
+}
+
+.tip-text {
+  font-size: var(--font-xs);
+  color: var(--primary-color);
+  line-height: 1.4;
+}
+
+/* 验证码按钮 */
+.code-btn {
+  flex-shrink: 0;
+  font-size: var(--font-xs);
+  font-weight: 600;
+  color: var(--primary-color);
+  white-space: nowrap;
+  padding: 0 8rpx;
+}
+
+.code-btn.disabled {
+  color: var(--text-placeholder);
+}

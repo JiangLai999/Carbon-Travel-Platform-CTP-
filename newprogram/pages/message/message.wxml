@@ -1,0 +1,38 @@
+<view class="page">
+  <view class="header">
+    <view class="back-btn" bindtap="goBack">
+      <text class="back-icon">←</text>
+    </view>
+    <text class="header-title">消息中心</text>
+    <text class="read-all" bindtap="markAllRead">全部已读</text>
+  </view>
+
+  <view class="tabs">
+    <scroll-view scroll-x class="tabs-scroll">
+      <view class="tab-item {{activeTab === item.id ? 'active' : ''}}" wx:for="{{tabs}}" wx:key="id" bindtap="switchTab" data-tab="{{item.id}}">
+        <text>{{item.name}}</text>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="message-list">
+    <view class="message-item {{item.isRead === 0 ? 'unread' : ''}}" wx:for="{{messages}}" wx:key="id" bindtap="readMessage" data-id="{{item.id}}">
+      <view class="msg-icon">
+        <text>{{item.icon}}</text>
+      </view>
+      <view class="msg-content">
+        <view class="msg-header">
+          <text class="msg-title">{{item.title || '系统通知'}}</text>
+          <text class="msg-time">{{item.timeStr}}</text>
+        </view>
+        <text class="msg-body">{{item.content}}</text>
+      </view>
+      <view class="unread-dot" wx:if="{{item.isRead === 0}}"></view>
+    </view>
+
+    <view wx:if="{{messages.length === 0}}" class="empty-tip">
+      <text class="empty-icon">🔔</text>
+      <text class="empty-text">暂无消息</text>
+    </view>
+  </view>
+</view>

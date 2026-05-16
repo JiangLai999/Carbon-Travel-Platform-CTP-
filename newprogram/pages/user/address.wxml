@@ -1,0 +1,89 @@
+<view class="page">
+  <view class="header">
+    <view class="back-btn" bindtap="goBack">
+      <text class="back-icon">←</text>
+    </view>
+    <text class="header-title">收货地址</text>
+    <view class="header-right"></view>
+  </view>
+
+  <scroll-view scroll-y class="address-list" wx:if="{{addresses.length > 0}}">
+    <view class="address-item" wx:for="{{addresses}}" wx:key="id">
+      <view class="address-content" bindtap="selectAddress" data-id="{{item.id}}">
+        <view class="address-header">
+          <text class="address-name">{{item.name}}</text>
+          <text class="address-phone">{{item.phone}}</text>
+          <view class="default-tag" wx:if="{{item.isDefault === 1}}">默认</view>
+        </view>
+        <text class="address-full">{{item.fullAddress}}</text>
+      </view>
+      <view class="address-actions">
+        <view class="action-btn" bindtap="setDefault" data-id="{{item.id}}" wx:if="{{item.isDefault !== 1}}">
+          <text>设为默认</text>
+        </view>
+        <view class="action-btn" bindtap="editAddress" data-id="{{item.id}}">
+          <text>编辑</text>
+        </view>
+        <view class="action-btn delete" bindtap="deleteAddress" data-id="{{item.id}}">
+          <text>删除</text>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+
+  <view class="empty-card" wx:if="{{addresses.length === 0 && !loading}}">
+    <text class="empty-icon">📍</text>
+    <text class="empty-title">暂无收货地址</text>
+    <text class="empty-desc">添加收货地址，方便积分兑换</text>
+  </view>
+
+  <view class="add-btn-section">
+    <button class="btn-add" bindtap="addAddress" style="height: 42rpx; display: block; box-sizing: border-box; left: 0rpx; top: -23rpx; position: relative">添加新地址</button>
+  </view>
+
+  <!-- 地址表单弹窗 -->
+  <view class="modal-mask" wx:if="{{showModal}}" bindtap="closeModal"></view>
+  <view class="modal" wx:if="{{showModal}}">
+    <view class="modal-header">
+      <text class="modal-title">{{isEdit ? '编辑地址' : '新增地址'}}</text>
+      <text class="modal-close" bindtap="closeModal">✕</text>
+    </view>
+    <scroll-view scroll-y class="modal-content">
+      <view class="form-group">
+        <text class="form-label">收货人</text>
+        <input class="form-input" placeholder="请输入收货人姓名" value="{{addressForm.name}}" bindinput="onInput" data-field="name" />
+      </view>
+      <view class="form-group">
+        <text class="form-label">手机号</text>
+        <input class="form-input" placeholder="请输入联系电话" value="{{addressForm.phone}}" bindinput="onInput" data-field="phone" type="number" maxlength="11" />
+      </view>
+      <view class="form-group">
+        <text class="form-label">省份</text>
+        <input class="form-input" placeholder="请输入省份" value="{{addressForm.province}}" bindinput="onInput" data-field="province" />
+      </view>
+      <view class="form-group">
+        <text class="form-label">城市</text>
+        <input class="form-input" placeholder="请输入城市" value="{{addressForm.city}}" bindinput="onInput" data-field="city" />
+      </view>
+      <view class="form-group">
+        <text class="form-label">区县</text>
+        <input class="form-input" placeholder="请输入区县" value="{{addressForm.district}}" bindinput="onInput" data-field="district" />
+      </view>
+      <view class="form-group">
+        <text class="form-label">详细地址</text>
+        <textarea class="form-textarea" placeholder="请输入详细地址，如街道、小区、楼栋、门牌号" value="{{addressForm.detailAddress}}" bindinput="onInput" data-field="detailAddress" />
+      </view>
+      <view class="form-group">
+        <checkbox-group bindchange="onDefaultChange">
+          <label class="checkbox-label">
+            <checkbox value="1" checked="{{addressForm.isDefault === 1}}" />
+            <text>设为默认地址</text>
+          </label>
+        </checkbox-group>
+      </view>
+    </scroll-view>
+    <view class="modal-footer">
+      <button class="btn-save" bindtap="saveAddress">保存</button>
+    </view>
+  </view>
+</view>

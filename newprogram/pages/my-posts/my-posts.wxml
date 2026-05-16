@@ -1,0 +1,32 @@
+<view class="page">
+  <view class="header">
+    <text class="header-title">我的帖子</text>
+    <button class="btn-create" bindtap="goCreatePost">+ 发帖</button>
+  </view>
+
+  <view class="posts-list" wx:if="{{posts.length > 0}}">
+    <view class="post-item" wx:for="{{posts}}" wx:key="id" bindtap="goPostDetail" data-id="{{item.id}}">
+      <view class="post-content">
+        <text class="post-title">{{item.title}}</text>
+        <text class="post-desc">{{item.content.length > 60 ? item.content.substring(0, 60) + '...' : item.content}}</text>
+        <view class="post-footer">
+          <text class="post-time">{{item.timeStr}}</text>
+          <view class="post-stats">
+            <text class="stat">👁 {{item.views || 0}}</text>
+            <text class="stat">❤ {{item.likes || 0}}</text>
+            <text class="stat">💬 {{item.commentsCount || 0}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="post-action" catchtap="deletePost" data-id="{{item.id}}">
+        <text class="delete-btn">删除</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="empty-tip" wx:if="{{!loading && posts.length === 0}}">
+    <text class="empty-icon">📝</text>
+    <text class="empty-text">还没有发过帖子</text>
+    <button class="btn-go" bindtap="goCreatePost">去发帖</button>
+  </view>
+</view>

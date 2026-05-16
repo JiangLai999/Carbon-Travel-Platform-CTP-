@@ -1,0 +1,60 @@
+<view class="page">
+  <view class="post-card" wx:if="{{post && post.title}}">
+    <text class="post-title">{{post.title}}</text>
+    <text class="post-content">{{post.content}}</text>
+    
+    <view class="post-images" wx:if="{{imageList && imageList.length > 0}}">
+      <image 
+        class="post-image {{imageList.length === 1 ? 'single' : ''}}" 
+        src="{{item}}" 
+        data-url="{{item}}"
+        mode="aspectFill" 
+        bindtap="previewImage"
+        wx:for="{{imageList}}" 
+        wx:key="*this"
+      />
+    </view>
+    
+    <view class="post-meta">
+      <view class="author-info">
+        <text class="author-avatar">{{post.authorName ? post.authorName[0] : '匿'}}</text>
+        <text class="author-name">{{post.authorName || '匿名用户'}}</text>
+      </view>
+      <text class="time">{{post.createdAt}}</text>
+    </view>
+    <view class="post-stats">
+      <view class="stat-item {{hasLiked ? 'liked' : ''}}" bindtap="onLike">
+        <text class="stat-icon">{{hasLiked ? '❤️' : '🤍'}}</text>
+        <text class="stat-value">{{post.likes || 0}}</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-icon">💬</text>
+        <text class="stat-value">{{post.commentsCount || 0}}</text>
+      </view>
+      <view class="stat-item">
+        <text class="stat-icon">👁</text>
+        <text class="stat-value">{{post.views || 0}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="comments-section">
+    <text class="section-title">评论 ({{post.commentsCount || comments.length}})</text>
+    <view class="comment-item" wx:for="{{comments}}" wx:key="id">
+      <view class="comment-header">
+        <view class="comment-user">
+          <text class="comment-avatar">{{item.userName ? item.userName[0] : '匿'}}</text>
+          <text class="comment-author">{{item.userName || '匿名用户'}}</text>
+        </view>
+        <text class="comment-time">{{item.timeStr}}</text>
+      </view>
+      <text class="comment-content">{{item.content}}</text>
+    </view>
+    <view class="empty" wx:if="{{comments.length === 0}}">暂无评论，快来发表你的看法吧~</view>
+  </view>
+
+  <view class="comment-input">
+    <input class="input" placeholder="写评论..." value="{{commentContent}}" bindinput="onCommentInput" confirm-type="send" bindconfirm="submitComment" />
+    <button class="btn-send {{commentContent ? 'active' : ''}}" bindtap="submitComment">发送</button>
+  </view>
+</view>

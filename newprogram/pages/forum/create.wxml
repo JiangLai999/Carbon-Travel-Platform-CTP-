@@ -1,0 +1,38 @@
+<view class="page">
+  <view class="form-section">
+    <view class="form-item">
+      <text class="form-label">板块</text>
+      <view class="section-list">
+        <view 
+          class="section-item {{selectedSectionIdx === index ? 'active' : ''}}" 
+          wx:for="{{sections}}" 
+          wx:key="id" 
+          bindtap="selectSection" 
+          data-idx="{{index}}"
+        >
+          <text>{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+    <view class="form-item">
+      <input class="title-input" placeholder="标题" value="{{title}}" bindinput="onInput" data-field="title" />
+    </view>
+    <view class="form-item">
+      <textarea class="content-input" placeholder="分享你的低碳出行故事..." value="{{content}}" bindinput="onInput" data-field="content" />
+    </view>
+    <view class="form-item">
+      <text class="form-label">图片</text>
+      <view class="image-list">
+        <view class="image-item" wx:for="{{images}}" wx:key="*this">
+          <image class="preview-img" src="{{item}}" mode="aspectFill" />
+          <view class="remove-btn" bindtap="removeImage" data-idx="{{index}}">×</view>
+        </view>
+        <view class="add-image-btn" bindtap="chooseImage" wx:if="{{images.length < 9}}">
+          <text class="add-icon">+</text>
+          <text class="add-text">添加图片</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <button class="btn-submit" bindtap="submitPost">发布</button>
+</view>

@@ -1,0 +1,154 @@
+<view class="page">
+  <!-- 顶部导航 -->
+  <view class="header">
+    <view class="header-left">
+      <text class="header-title">我的行程</text>
+      <text class="header-subtitle">低碳出行，绿色生活</text>
+    </view>
+    <button class="btn-record" bindtap="goRecord" style="width: 213rpx; display: flex; box-sizing: border-box; left: 0rpx; top: 2rpx; position: relative; height: 51rpx">
+      <text class="btn-icon">+</text>
+      <text>记录出行</text>
+    </button>
+  </view>
+
+  <!-- 统计概览卡片 -->
+  <view class="stats-overview">
+    <view class="stats-card">
+      <view class="stat-item">
+        <text class="stat-value">{{stats.totalTrips || 0}}</text>
+        <text class="stat-label">总行程</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-value">{{stats.totalDistance || '0.0'}}</text>
+        <text class="stat-label">总里程(km)</text>
+      </view>
+      <view class="stat-divider"></view>
+      <view class="stat-item">
+        <text class="stat-value carbon">{{stats.totalCarbon || '0.0'}}</text>
+        <text class="stat-label">减碳(kg)</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 筛选栏 -->
+  <view class="filter-bar">
+    <scroll-view class="filter-scroll" scroll-x enable-flex>
+      <view class="filter-item {{filterType === 'all' ? 'active' : ''}}" bindtap="setFilter" data-type="all">
+        <text>全部</text>
+      </view>
+      <view class="filter-item {{filterType === 'approved' ? 'active' : ''}}" bindtap="setFilter" data-type="approved">
+        <text>已通过</text>
+      </view>
+      <view class="filter-item {{filterType === 'pending' ? 'active' : ''}}" bindtap="setFilter" data-type="pending">
+        <text>待审核</text>
+      </view>
+      <view class="filter-item {{filterType === 'rejected' ? 'active' : ''}}" bindtap="setFilter" data-type="rejected">
+        <text>已驳回</text>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!-- 行程列表 -->
+  <view class="trips-container" wx:if="{{filteredTrips.length > 0}}">
+    <!-- 日期分组 -->
+    <view class="date-group" wx:for="{{groupedTrips}}" wx:key="date" wx:for-item="group">
+      <view class="date-header">
+        <text class="date-text">{{group.date}}</text>
+        <text class="date-count">{{group.trips.length}} 次出行</text>
+      </view>
+      
+      <view class="trip-cards">
+        <view class="trip-card" wx:for="{{group.trips}}" wx:key="id" bindtap="goDetail" data-id="{{item.id}}">
+          <!-- 卡片头部 -->
+          <view class="card-header">
+            <view class="mode-badge">
+              <text class="mode-icon">{{item.modeIcon}}</text>
+              <text class="mode-name">{{item.travelModeName}}</text>
+            </view>
+            <view class="header-right">
+              <view class="track-tag" wx:if="{{item.hasTrackPoints}}">
+                <text>🛤️ 轨迹</text>
+              </view>
+              <view class="status-badge {{getStatusClass(item.status)}}">
+                <text>{{item.statusText}}</text>
+              </view>
+            </view>
+          </view>
+
+          <!-- 路线信息 -->
+          <view class="route-section">
+            <view class="route-line">
+              <view class="route-dot start"></view>
+              <view class="route-path"></view>
+              <view class="route-dot end"></view>
+            </view>
+            <view class="route-info">
+              <view class="location-item">
+                <text class="location-label">起</text>
+                <text class="location-text">{{item.startLocation}}</text>
+              </view>
+              <view class="location-item">
+                <text class="location-label end">终</text>
+                <text class="location-text">{{item.endLocation}}</text>
+              </view>
+            </view>
+          </view>
+
+          <!-- 数据统计 -->
+          <view class="card-stats">
+            <view class="stat-row">
+              <view class="stat-block">
+                <text class="stat-num">{{item.distance}}</text>
+                <text class="stat-unit">km</text>
+              </view>
+              <view class="stat-block">
+                <text class="stat-num carbon">{{item.carbonReduction}}</text>
+                <text class="stat-unit">kg CO₂</text>
+              </view>
+              <view class="stat-block" wx:if="{{item.pointsEarned > 0}}">
+                <text class="stat-num points">+{{item.pointsEarned}}</text>
+                <text class="stat-unit">积分</text>
+              </view>
+            </view>
+          </view>
+
+          <!-- 时间戳 -->
+          <view class="card-footer">
+            <text class="time-text">{{item.timeStr}}</text>
+            <view class="arrow-icon">
+              <text>›</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 空状态 -->
+  <view class="empty-state" wx:if="{{!loading && filteredTrips.length === 0}}">
+    <view class="empty-illustration">
+      <text class="empty-icon">🌿</text>
+      <view class="empty-leaf leaf-1">🍃</view>
+      <view class="empty-leaf leaf-2">🌱</view>
+    </view>
+    <text class="empty-title">{{filterType === 'all' ? '还没有出行记录' : '暂无符合条件的记录'}}</text>
+    <text class="empty-desc">{{filterType === 'all' ? '开始记录你的低碳出行吧' : '切换筛选条件试试看'}}</text>
+    <button class="btn-go" bindtap="goRecord" wx:if="{{filterType === 'all'}}">
+      <text>开始记录</text>
+    </button>
+  </view>
+
+  <!-- 加载状态 -->
+  <view class="loading-more" wx:if="{{loading}}">
+    <view class="loading-spinner"></view>
+    <text>加载中...</text>
+  </view>
+
+  <!-- 加载更多 -->
+  <view class="load-more" wx:if="{{!loading && filteredTrips.length > 0 && hasMore}}" bindtap="loadMore">
+    <text>加载更多</text>
+  </view>
+
+  <view class="bottom-safe"></view>
+</view>

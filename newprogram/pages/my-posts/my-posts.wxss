@@ -1,0 +1,133 @@
+page {
+  background: var(--bg-page);
+}
+
+.page {
+  min-height: 100vh;
+  background: var(--bg-page);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-lg) 32rpx;
+  background: var(--bg-card);
+  border-bottom: 1rpx solid var(--border-light);
+}
+
+.header-title {
+  font-size: 34rpx;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.btn-create {
+  font-size: var(--font-md);
+  color: #fff;
+  background: var(--primary-color);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: 8rpx;
+  border: none;
+  line-height: 1.5;
+}
+
+.posts-list {
+  padding: var(--spacing-md) var(--spacing-lg);
+}
+
+.post-item {
+  display: flex;
+  align-items: flex-start;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.post-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.post-title {
+  font-size: var(--font-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  display: block;
+  margin-bottom: var(--spacing-sm);
+  line-height: 1.4;
+}
+
+.post-desc {
+  font-size: var(--font-md);
+  color: var(--text-tertiary);
+  display: block;
+  margin-bottom: var(--spacing-md);
+  line-height: 1.5;
+}
+
+.post-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-time {
+  font-size: var(--font-xs);
+  color: var(--text-placeholder);
+}
+
+.post-stats {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.stat {
+  font-size: var(--font-xs);
+  color: var(--text-placeholder);
+}
+
+.post-action {
+  width: 80rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-btn {
+  font-size: var(--font-xs);
+  color: var(--error-color);
+  padding: 8rpx var(--spacing-md);
+  background: var(--error-bg);
+  border-radius: 6rpx;
+}
+
+.empty-tip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 120rpx 40rpx;
+}
+
+.empty-icon {
+  font-size: 80rpx;
+  margin-bottom: var(--spacing-lg);
+}
+
+.empty-text {
+  font-size: var(--font-lg);
+  color: var(--text-placeholder);
+  margin-bottom: 32rpx;
+}
+
+.btn-go {
+  font-size: var(--font-lg);
+  color: #fff;
+  background: var(--primary-color);
+  padding: var(--spacing-md) 48rpx;
+  border-radius: var(--radius-sm);
+  border: none;
+}

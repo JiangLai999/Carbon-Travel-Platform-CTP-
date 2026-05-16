@@ -1,0 +1,153 @@
+<view class="page">
+  <!-- 头部区域 -->
+  <view class="header">
+    <view class="header-bg"></view>
+    <view class="header-content">
+      <view class="header-left">
+        <text class="greeting">{{greeting}}</text>
+        <text class="username">{{userInfo.nickname || '低碳用户'}}</text>
+      </view>
+      <view class="header-right">
+        <view class="msg-btn" bindtap="goMessages">
+          <text class="msg-icon">🔔</text>
+          <view class="msg-badge" wx:if="{{unreadCount > 0}}"></view>
+        </view>
+        <view class="avatar-wrap" wx:if="{{userInfo.avatar}}">
+          <image class="avatar" src="{{userInfo.avatar}}" mode="aspectFill" />
+        </view>
+        <view class="avatar-placeholder" wx:else>
+          <text class="avatar-text">{{userInfo.nickname ? userInfo.nickname[0] : '我'}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <scroll-view scroll-y class="scroll-content" enhanced show-scrollbar="{{false}}">
+    <!-- 碳减排主卡片 -->
+    <view class="main-card">
+      <view class="card-decoration">
+        <view class="deco-circle circle-1"></view>
+        <view class="deco-circle circle-2"></view>
+        <view class="deco-leaf">🌿</view>
+      </view>
+      <view class="main-top">
+        <view class="main-label-row">
+          <text class="main-label">本月碳减排</text>
+          <view class="main-badge">
+            <text>{{userLevel}}</text>
+          </view>
+        </view>
+      </view>
+      <view class="main-value-row">
+        <text class="main-value">{{monthlyCarbon}}</text>
+        <text class="main-unit">kg CO₂</text>
+      </view>
+      <view class="progress-bar">
+        <view class="progress-fill" style="width: {{progressPercent}}%"></view>
+      </view>
+      <text class="progress-text">距离下一个等级还需 {{nextLevelCarbon}}kg</text>
+      <view class="main-divider"></view>
+      <view class="main-stats">
+        <view class="main-stat" bindtap="goPoints">
+          <text class="main-stat-value">{{totalPoints}}</text>
+          <text class="main-stat-label">可用积分</text>
+        </view>
+        <view class="main-stat-sep"></view>
+        <view class="main-stat">
+          <text class="main-stat-value">+{{todayPoints}}</text>
+          <text class="main-stat-label">今日获得</text>
+        </view>
+        <view class="main-stat-sep"></view>
+        <view class="main-stat">
+          <text class="main-stat-value">{{monthRecords || 0}}</text>
+          <text class="main-stat-label">本月出行</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 快捷入口 -->
+    <view class="section quick-section">
+      <view class="quick-grid">
+        <view class="quick-item" bindtap="goTravel">
+          <view class="quick-icon-wrap travel">
+            <text class="quick-icon">🚶</text>
+          </view>
+          <text class="quick-label">记录出行</text>
+        </view>
+        <view class="quick-item" bindtap="goShop">
+          <view class="quick-icon-wrap shop">
+            <text class="quick-icon">🛍️</text>
+          </view>
+          <text class="quick-label">积分商城</text>
+        </view>
+        <view class="quick-item" bindtap="goActivity">
+          <view class="quick-icon-wrap activity">
+            <text class="quick-icon">🎯</text>
+          </view>
+          <text class="quick-label">低碳活动</text>
+        </view>
+        <view class="quick-item" bindtap="goForum">
+          <view class="quick-icon-wrap forum">
+            <text class="quick-icon">💬</text>
+          </view>
+          <text class="quick-label">绿色社区</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 环保小贴士 -->
+    <view class="section">
+      <view class="tips-card">
+        <view class="tips-header">
+          <text class="tips-icon">💡</text>
+          <text class="tips-title">今日环保小贴士</text>
+        </view>
+        <text class="tips-content">{{dailyTip}}</text>
+      </view>
+    </view>
+
+    <!-- 最近出行 -->
+    <view class="section">
+      <view class="section-header">
+        <text class="section-title">最近出行</text>
+        <view class="section-more" bindtap="goTravel">
+          <text>查看全部</text>
+          <text class="arrow">›</text>
+        </view>
+      </view>
+      <view class="record-list" wx:if="{{recentRecords.length > 0}}">
+        <view class="record-item" wx:for="{{recentRecords}}" wx:key="id" bindtap="goTravel">
+          <view class="record-left">
+            <view class="record-mode-icon">{{item.mode}}</view>
+            <view class="record-info">
+              <view class="record-route">
+                <text class="route-text">{{item.startLocation || '起点'}}</text>
+                <text class="route-arrow">→</text>
+                <text class="route-text">{{item.endLocation || '终点'}}</text>
+              </view>
+              <text class="record-time">{{item.time}}</text>
+            </view>
+          </view>
+          <view class="record-right">
+            <text class="record-distance">{{item.distance}}</text>
+            <view class="record-stats">
+              <text class="record-carbon">-{{item.carbon}}kg</text>
+              <text class="record-pts">+{{item.points}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="empty-card" wx:else>
+        <view class="empty-icon">🌱</view>
+        <text class="empty-title">还没有出行记录</text>
+        <text class="empty-desc">开始你的第一次低碳出行吧</text>
+        <view class="empty-btn" bindtap="goTravel">
+          <text>开始记录</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 底部安全距离 -->
+    <view class="bottom-safe"></view>
+  </scroll-view>
+</view>
