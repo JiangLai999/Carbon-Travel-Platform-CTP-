@@ -24,7 +24,7 @@
     }
   },
   "compileType": "miniprogram",
-  "appid": "wxc27e2c21d55d2fb6",
+  "appid": "YOUR_WECHAT_APPID",
   "projectname": "carbon-travel-newprogram",
   "editorSetting": {},
   "libVersion": "3.15.0",
